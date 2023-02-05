@@ -3,7 +3,7 @@ import React from "react";
 
 type Variant = "text" | "contained" | "outlined";
 type Size = "small" | "medium" | "large";
-type Color = "primary" | "secondary" | "success" | "error" | "warning";
+type Color = "primary" | "secondary" | "success" | "error" | "warning" | "info";
 
 interface IProps {
   children: string | JSX.Element;

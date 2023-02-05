@@ -5,6 +5,13 @@
     margin-bottom: 1rem;
   }
 
+  .user_communications {
+    padding: 1rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
   .messages_action_row {
     display: flex;
     align-items: flex-end;

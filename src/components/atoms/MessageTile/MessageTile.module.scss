@@ -1,4 +1,19 @@
+@import '/src/styles/variables';
+
 #atom_message_tile {
   display: flex;
+  padding: 0 1rem;
+  border-radius: $border-radius-md;
+  background-color: $color-lightgrey;
+  gap: 1rem;
+}
+
+#atom_message_tile_self {
+  display: flex;
+  padding: 0 1rem;
+  border-radius: $border-radius-md;
+  justify-content: flex-end;
+  background-color: $color-blue;
+  color: $color-white;
   gap: 1rem;
 }

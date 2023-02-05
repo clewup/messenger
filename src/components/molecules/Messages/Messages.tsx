@@ -1,5 +1,5 @@
 import { IUser } from "../../../types/user";
-import React, { SetStateAction, useState } from "react";
+import React, { SetStateAction, useContext, useState } from "react";
 import styles from "./Messages.module.scss";
 import { messagesMockData } from "@/components/molecules/Messages/data/mockData";
 import MessageTile from "@/components/atoms/MessageTile/MessageTile";
@@ -7,6 +7,8 @@ import Button from "@/lib/mui/components/Button/Button";
 import Input from "@/lib/mui/components/Input/Input";
 import SendIcon from "@mui/icons-material/Send";
 import BackIcon from "@mui/icons-material/ArrowBackIosNew";
+import { Divider } from "@mui/material";
+import { UserContext } from "@/contexts/User/User";
 
 interface IProps {
   selectedUser: IUser;
@@ -14,7 +16,10 @@ interface IProps {
 }
 
 const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
+  const { user } = useContext(UserContext);
   const [newMessage, setNewMessage] = useState("");
+
+  if (!user) return <></>;
 
   return (
     <div id={styles.molecule_messages}>
@@ -28,11 +33,12 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
           <BackIcon />
         </Button>
       </div>
-      <div>
+      <Divider />
+      <div className={styles.user_communications}>
         {messagesMockData.map((message) => {
           return (
             <div key={message.text}>
-              <MessageTile message={message} />
+              <MessageTile user={user} message={message} />
             </div>
           );
         })}
@@ -44,8 +50,8 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
           onChange={(e) => setNewMessage(e.target.value)}
           className={styles.new_message_input}
         />
-        <Button onClick={() => null} endIcon={<SendIcon />}>
-          SEND
+        <Button onClick={() => null} color={"info"}>
+          <SendIcon />
         </Button>
       </div>
     </div>
