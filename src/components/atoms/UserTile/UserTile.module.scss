@@ -1,0 +1,28 @@
+@import '/src/styles/variables';
+
+#atom_user_tile {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    background-color: $color-lightgrey;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+  }
+
+  .user_information {
+    display: flex;
+    gap: 1rem;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .action_row {
+    padding: 0 1rem;
+  }
+}

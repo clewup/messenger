@@ -1,0 +1,18 @@
+#molecule_messages {
+  padding: 1rem;
+
+  .messages_header {
+    margin-bottom: 1rem;
+  }
+
+  .messages_action_row {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .new_message_input {
+      width: 100%;
+    }
+  }
+}

@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import { IUser } from "../../../interfaces/user";
+import { IUser } from "../../../types/user";
 import UserList from "../../molecules/UserList/UserList";
 import Messages from "../../molecules/Messages/Messages";
-import "./Messenger.scss";
+import styles from "./Messenger.module.scss";
+import { userListMockData } from "@/components/molecules/UserList/data/mockData";
 
 const Messenger: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<IUser>();
 
   return (
-    <div id={"organism-messenger"}>
+    <div id={styles.organism_messenger}>
       {!selectedUser ? (
-        <UserList setSelectedUser={setSelectedUser} />
+        <UserList users={userListMockData} setSelectedUser={setSelectedUser} />
       ) : (
-        <Messages selectedUser={selectedUser} />
+        <Messages
+          selectedUser={selectedUser}
+          setSelectedUser={setSelectedUser}
+        />
       )}
     </div>
   );

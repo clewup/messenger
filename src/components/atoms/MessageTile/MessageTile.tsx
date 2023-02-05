@@ -1,10 +1,16 @@
 import React from "react";
-import "./MessageTile.scss";
+import styles from "./MessageTile.module.scss";
+import { IMessage } from "@/types/message";
 
-const MessageTile: React.FC = () => {
+interface IProps {
+  message: IMessage;
+}
+
+const MessageTile: React.FC<IProps> = ({ message }) => {
   return (
-    <div id={"atom-message-tile"}>
-      <></>
+    <div id={styles.atom_message_tile}>
+      <p>{message.sender.firstName}:</p>
+      <p>{message.text}</p>
     </div>
   );
 };
