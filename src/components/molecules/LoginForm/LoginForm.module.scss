@@ -1,0 +1,11 @@
+@import '/src/styles/variables';
+
+#molecule_login_form {
+  background-color: $color-white;
+  border-radius: $border-radius-md;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}

@@ -4,7 +4,7 @@ import UserList from "../../molecules/UserList/UserList";
 import Messages from "../../molecules/Messages/Messages";
 import styles from "./Messenger.module.scss";
 import { userListMockData } from "@/components/molecules/UserList/data/mockData";
-import useUser from "@/hooks/useUser/useUser";
+import { useUser } from "@/contexts/User/User";
 
 const Messenger: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<IUser>();

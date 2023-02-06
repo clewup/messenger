@@ -1,7 +1,7 @@
 import Head from "next/head";
-import IndexTemplate from "@/components/templates/Index/Index";
+import LoginTemplate from "@/components/templates/Login/Login";
 
-export default function Home() {
+export default function Login() {
   return (
     <>
       <Head>
@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <IndexTemplate />
+        <LoginTemplate />
       </div>
     </>
   );
