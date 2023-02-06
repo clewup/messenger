@@ -1,0 +1,14 @@
+@import '/src/styles/variables';
+
+#organism_sign_in {
+  background-color: $color-white;
+  border-radius: $border-radius-md;
+  width: 400px;
+
+  .header {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
