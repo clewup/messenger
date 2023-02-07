@@ -23,12 +23,12 @@ const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
     const io = new IOServer(res.socket.server);
     res.socket.server.io = io;
 
-    io.on("connection", (socket) => {
+    io.on("connect", (socket) => {
       console.log(`Socket Connection ${socket.id}`);
 
       socket.on("message-request", (message) => {
-        console.log(`Message Request ${message}`);
-        io.emit("message-response", message);
+        console.log(`Message Request ${message.user.email}: ${message.text}`);
+        socket.emit("message-response", message);
       });
     });
   }

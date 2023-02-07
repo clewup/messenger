@@ -1,6 +1,6 @@
-import {IUser} from "@/types/user";
+import { IUser } from "@/types/user";
 
 export interface IMessage {
-    sender: IUser;
-    text: string;
+  user: IUser;
+  text: string;
 }

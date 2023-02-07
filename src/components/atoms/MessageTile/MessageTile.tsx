@@ -12,15 +12,13 @@ const MessageTile: React.FC<IProps> = ({ user, message }) => {
   return (
     <div
       id={
-        message.sender.id !== user.id
+        message.user.id !== user.id
           ? styles.atom_message_tile
           : styles.atom_message_tile_self
       }
     >
       <p>
-        <b>
-          {message.sender.id !== user.id ? message.sender.firstName : "You"}:
-        </b>
+        <b>{message.user.id !== user.id ? message.user.firstName : "You"}:</b>
       </p>
       <p>{message.text}</p>
     </div>

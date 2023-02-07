@@ -12,19 +12,19 @@ import { userListMockData } from "@/components/molecules/UserList/data/mockData"
 import { useRouter } from "next/router";
 
 interface IProps {
-  user: IUser | undefined;
-  setUser: React.Dispatch<SetStateAction<IUser | undefined>>;
+  user: IUser | null;
+  setUser: React.Dispatch<SetStateAction<IUser | null>>;
 }
 
 const initialState: IProps = {
-  user: undefined,
+  user: null,
   setUser: (() => undefined) as React.Dispatch<any>,
 };
 
 const UserContext = createContext<IProps>(initialState);
 
 const UserProvider = ({ children }: any) => {
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<IUser | null>(null);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -64,7 +64,7 @@ const useUser = () => {
           setAccessToken(res.data.accessToken);
           setAuthenticated(true);
         } else {
-          setUser(undefined);
+          setUser(null);
         }
       })
       .catch((err) => setError(err))
@@ -81,7 +81,7 @@ const useUser = () => {
           setAccessToken(res.data.accessToken);
           setAuthenticated(true);
         } else {
-          setUser(undefined);
+          setUser(null);
         }
       })
       .catch((err) => setError(err))
@@ -90,7 +90,7 @@ const useUser = () => {
 
   const logout = () => {
     setLoading(true);
-    setUser(undefined);
+    setUser(null);
     setAccessToken("");
     setAuthenticated(false);
     setLoading(false);

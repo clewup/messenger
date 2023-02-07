@@ -1,5 +1,5 @@
 import { IUser } from "../../../types/user";
-import React, { SetStateAction, useContext, useState } from "react";
+import React, { SetStateAction, useContext, useEffect, useState } from "react";
 import styles from "./Messages.module.scss";
 import { messagesMockData } from "@/components/molecules/Messages/data/mockData";
 import MessageTile from "@/components/atoms/MessageTile/MessageTile";
@@ -10,6 +10,7 @@ import BackIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Divider } from "@mui/material";
 import { UserContext, useUser } from "@/contexts/User/User";
 import { useSocket } from "@/contexts/Socket/Socket";
+import { IMessage } from "@/types/message";
 
 interface IProps {
   selectedUser: IUser;
@@ -19,13 +20,24 @@ interface IProps {
 const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
   const { user } = useUser();
   const { socket } = useSocket();
-  const [newMessage, setNewMessage] = useState("");
+  const [messages, setMessages] = useState<IMessage[]>([]);
+  const [message, setMessage] = useState("");
 
-  if (!user || !socket) return <></>;
+  useEffect(() => {
+    if (socket) {
+      socket.on("message-response", (message: IMessage) => {
+        setMessages((prev) => {
+          return [...prev, message];
+        });
+      });
+    }
+  }, [socket]);
+
+  if (!user) return <></>;
 
   const handleSubmit = () => {
-    socket.emit("message-request", newMessage);
-    setNewMessage("");
+    socket?.emit("message-request", { user, text: message });
+    setMessage("");
   };
 
   return (
@@ -42,7 +54,7 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
       </div>
       <Divider />
       <div className={styles.user_communications}>
-        {messagesMockData.map((message) => {
+        {messages.map((message) => {
           return (
             <div key={`message-${Math.random()}`}>
               <MessageTile user={user} message={message} />
@@ -53,8 +65,8 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
       <div className={styles.messages_action_row}>
         <Input
           label={""}
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className={styles.new_message_input}
         />
         <Button onClick={handleSubmit} color={"info"}>

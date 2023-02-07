@@ -8,33 +8,7 @@ import { useSocket } from "@/contexts/Socket/Socket";
 export default function Home() {
   const [chat, setChat] = useState<IMessage[]>([]);
   const [message, setMessage] = useState<string>("");
-  let socket: Socket;
-  const { setSocket } = useSocket();
-
-  useEffect(() => {
-    socketInitializer();
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
-  const socketInitializer = async () => {
-    fetch("/api/socket");
-
-    const socket = io();
-    setSocket(socket);
-
-    socket?.on("connect", () => {
-      console.log("Socket Connection Established");
-    });
-
-    socket?.on("message-response", (msg) => {
-      setMessage(msg);
-    });
-  };
-
-  useEffect(() => {}, []);
+  const { socket, setSocket } = useSocket();
 
   return (
     <>
