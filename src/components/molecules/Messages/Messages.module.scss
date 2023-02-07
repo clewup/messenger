@@ -10,6 +10,8 @@
     gap: 1rem;
     display: flex;
     flex-direction: column;
+    height: 30vh;
+    overflow-y: auto;
   }
 
   .messages_action_row {

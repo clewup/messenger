@@ -17,7 +17,7 @@ interface NextApiResponseWithSocket extends NextApiResponse {
 
 const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
   if (res.socket.server.io) {
-    console.log("Socket Already Initialized");
+    console.log("Socket Initialized");
   } else {
     console.log("Socket Initializing");
     const io = new IOServer(res.socket.server);
@@ -26,9 +26,13 @@ const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
     io.on("connect", (socket) => {
       console.log(`Socket Connection ${socket.id}`);
 
+      const messages = [];
       socket.on("message-request", (message) => {
         console.log(`Message Request ${message.user.email}: ${message.text}`);
-        socket.emit("message-response", message);
+
+        socket
+          .to(message.room)
+          .emit("message-response", { ...message, room: message.user.id });
       });
     });
   }

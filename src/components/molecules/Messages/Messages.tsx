@@ -1,5 +1,11 @@
 import { IUser } from "../../../types/user";
-import React, { SetStateAction, useContext, useEffect, useState } from "react";
+import React, {
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styles from "./Messages.module.scss";
 import { messagesMockData } from "@/components/molecules/Messages/data/mockData";
 import MessageTile from "@/components/atoms/MessageTile/MessageTile";
@@ -20,6 +26,8 @@ interface IProps {
 const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
   const { user } = useUser();
   const { socket } = useSocket();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [message, setMessage] = useState("");
 
@@ -29,6 +37,7 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
         setMessages((prev) => {
           return [...prev, message];
         });
+        messagesEndRef.current?.scrollIntoView();
       });
     }
   }, [socket]);
@@ -36,7 +45,11 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
   if (!user) return <></>;
 
   const handleSubmit = () => {
-    socket?.emit("message-request", { user, text: message });
+    socket?.emit("message-request", {
+      user,
+      text: message,
+      room: selectedUser.id,
+    });
     setMessage("");
   };
 
@@ -61,6 +74,7 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
             </div>
           );
         })}
+        <div ref={messagesEndRef} />
       </div>
       <div className={styles.messages_action_row}>
         <Input
