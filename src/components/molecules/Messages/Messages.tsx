@@ -8,7 +8,8 @@ import Input from "@/lib/mui/components/Input/Input";
 import SendIcon from "@mui/icons-material/Send";
 import BackIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Divider } from "@mui/material";
-import { UserContext } from "@/contexts/User/User";
+import { UserContext, useUser } from "@/contexts/User/User";
+import { useSocket } from "@/contexts/Socket/Socket";
 
 interface IProps {
   selectedUser: IUser;
@@ -16,10 +17,16 @@ interface IProps {
 }
 
 const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
+  const { socket } = useSocket();
   const [newMessage, setNewMessage] = useState("");
 
-  if (!user) return <></>;
+  if (!user || !socket) return <></>;
+
+  const handleSubmit = () => {
+    socket.emit("message-request", newMessage);
+    setNewMessage("");
+  };
 
   return (
     <div id={styles.molecule_messages}>
@@ -37,7 +44,7 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
       <div className={styles.user_communications}>
         {messagesMockData.map((message) => {
           return (
-            <div key={message.text}>
+            <div key={`message-${Math.random()}`}>
               <MessageTile user={user} message={message} />
             </div>
           );
@@ -50,7 +57,7 @@ const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
           onChange={(e) => setNewMessage(e.target.value)}
           className={styles.new_message_input}
         />
-        <Button onClick={() => null} color={"info"}>
+        <Button onClick={handleSubmit} color={"info"}>
           <SendIcon />
         </Button>
       </div>

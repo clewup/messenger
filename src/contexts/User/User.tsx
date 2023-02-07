@@ -52,12 +52,7 @@ const useUser = () => {
     if (!user && !accessToken && !isAuthenticated) {
       router.push("/login");
     }
-  }, [accessToken]);
-
-  // Temporary Implementation
-  useEffect(() => {
-    setUser(userListMockData[0]);
-  }, [setUser]);
+  }, [user, accessToken, isAuthenticated]);
 
   const login = (login: ILogin) => {
     setLoading(true);
