@@ -31,28 +31,10 @@ const SocketProvider = ({ children }: any) => {
 
 const useSocket = () => {
   const context = useContext(SocketContext);
-  const { socket, setSocket } = context;
 
   if (!context) {
     throw new Error("Warning: Context is being used outside of a provider.");
   }
-
-  useEffect(() => {
-    fetch("/api/socket").finally(() => {
-      const socketio = io();
-      socketio.on("connect", () => {
-        console.log("Socket Client Initialized");
-      });
-      socketio.on("disconnect", () => {
-        console.log("Socket Disconnected");
-      });
-      setSocket(socketio);
-    });
-    function cleanup() {
-      socket?.disconnect();
-    }
-    return cleanup();
-  }, []);
 
   return context;
 };

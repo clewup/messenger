@@ -15,8 +15,10 @@ import SendIcon from "@mui/icons-material/Send";
 import BackIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Divider } from "@mui/material";
 import { UserContext, useUser } from "@/contexts/User/User";
-import { useSocket } from "@/contexts/Socket/Socket";
 import { IMessage } from "@/types/message";
+import { IChatRequest } from "@/types/socket";
+import io, { Socket } from "socket.io-client";
+let socket: Socket;
 
 interface IProps {
   selectedUser: IUser;
@@ -25,31 +27,35 @@ interface IProps {
 
 const Messages: React.FC<IProps> = ({ selectedUser, setSelectedUser }) => {
   const { user } = useUser();
-  const { socket } = useSocket();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (socket) {
-      socket.on("message-response", (message: IMessage) => {
-        setMessages((prev) => {
-          return [...prev, message];
-        });
-        messagesEndRef.current?.scrollIntoView();
+    socketInitializer();
+  }, []);
+
+  const socketInitializer = async () => {
+    await fetch("/api/socket");
+    socket = io();
+
+    socket.on("connect", () => {
+      console.log("Socket Client Initialized");
+    });
+
+    socket.on("messageResponse", (message: IMessage) => {
+      setMessages((prev) => {
+        return [...prev, message];
       });
-    }
-  }, [socket]);
+      messagesEndRef.current?.scrollIntoView();
+    });
+  };
 
   if (!user) return <></>;
 
   const handleSubmit = () => {
-    socket?.emit("message-request", {
-      user,
-      text: message,
-      room: selectedUser.id,
-    });
+    socket.emit("messageRequest", message);
     setMessage("");
   };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./UserList.module.scss";
+import styles from "./RoomList.module.scss";
 import { IRoom } from "@/types/room";
 import RoomTile from "@/components/atoms/RoomTile/RoomTile";
 

@@ -81,7 +81,9 @@ const RegisterForm = () => {
               }
               type={"password"}
             />
-            <Button onClick={handleSubmit}>Register</Button>
+            <Button onClick={handleSubmit} isLoading={isLoading}>
+              Register
+            </Button>
           </Form>
         );
       }}

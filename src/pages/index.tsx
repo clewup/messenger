@@ -1,15 +1,10 @@
 import Head from "next/head";
 import IndexTemplate from "@/components/templates/Index/Index";
-import { useEffect, useState } from "react";
-import io, { Socket } from "socket.io-client";
-import { IMessage } from "@/types/message";
+import React, { useEffect } from "react";
+import io from "socket.io-client";
 import { useSocket } from "@/contexts/Socket/Socket";
 
-export default function Home() {
-  const [chat, setChat] = useState<IMessage[]>([]);
-  const [message, setMessage] = useState<string>("");
-  const { socket, setSocket } = useSocket();
-
+const Index = () => {
   return (
     <>
       <Head>
@@ -23,4 +18,5 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+export default Index;

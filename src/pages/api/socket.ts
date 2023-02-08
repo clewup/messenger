@@ -15,6 +15,12 @@ interface NextApiResponseWithSocket extends NextApiResponse {
   socket: SocketWithIO;
 }
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
   if (res.socket.server.io) {
     console.log("Socket Initialized");
@@ -23,20 +29,15 @@ const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
     const io = new IOServer(res.socket.server);
     res.socket.server.io = io;
 
-    io.on("connect", (socket) => {
+    io.on("connection", (socket) => {
       console.log(`Socket Connection ${socket.id}`);
 
-      const messages = [];
-      socket.on("message-request", (message) => {
-        console.log(`Message Request ${message.user.email}: ${message.text}`);
-
-        socket
-          .to(message.room)
-          .emit("message-response", { ...message, room: message.user.id });
+      socket.on("messageRequest", (message) => {
+        console.log(`Chat Request ${message.user.email}: ${message.text}`);
+        socket.emit("messageResponse", message);
       });
     });
   }
   res.end();
 };
-
 export default SocketHandler;

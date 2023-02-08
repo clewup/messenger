@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import styles from "./UserTile.module.scss";
+import styles from "./RoomTile.module.scss";
 import { IUser } from "@/types/user";
 import SendIcon from "@mui/icons-material/Send";
 import { placeholders } from "@/enums/placeholders";

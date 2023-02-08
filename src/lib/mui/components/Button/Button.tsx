@@ -1,5 +1,5 @@
-import MuiButton from "@mui/material/Button";
 import React from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 type Variant = "text" | "contained" | "outlined";
 type Size = "small" | "medium" | "large";
@@ -13,6 +13,8 @@ interface IProps {
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
   onClick: () => void;
+  isDisabled?: boolean;
+  isLoading?: boolean;
 }
 
 const Button: React.FC<IProps> = ({
@@ -23,18 +25,22 @@ const Button: React.FC<IProps> = ({
   startIcon,
   endIcon,
   onClick,
+  isDisabled,
+  isLoading,
 }) => {
   return (
-    <MuiButton
+    <LoadingButton
       variant={variant}
       size={size}
       color={color}
       startIcon={startIcon}
       endIcon={endIcon}
       onClick={onClick}
+      disabled={isDisabled}
+      loading={isLoading}
     >
       {children}
-    </MuiButton>
+    </LoadingButton>
   );
 };
 export default Button;
