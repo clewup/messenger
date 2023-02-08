@@ -48,12 +48,6 @@ const useUser = () => {
     throw new Error("Warning: Context is being used outside of a provider.");
   }
 
-  useEffect(() => {
-    if (!user && !accessToken && !isAuthenticated) {
-      router.push("/login");
-    }
-  }, [user, accessToken, isAuthenticated]);
-
   const login = (login: ILogin) => {
     setLoading(true);
 

@@ -1,10 +1,19 @@
 import Head from "next/head";
 import IndexTemplate from "@/components/templates/Index/Index";
 import React, { useEffect } from "react";
-import io from "socket.io-client";
-import { useSocket } from "@/contexts/Socket/Socket";
+import { useUser } from "@/contexts/User/User";
+import { useRouter } from "next/router";
 
 const Index = () => {
+  const { user } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user]);
+
   return (
     <>
       <Head>

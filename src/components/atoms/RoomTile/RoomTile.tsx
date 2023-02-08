@@ -1,6 +1,5 @@
-import React, { SetStateAction } from "react";
+import React from "react";
 import styles from "./RoomTile.module.scss";
-import { IUser } from "@/types/user";
 import SendIcon from "@mui/icons-material/Send";
 import { placeholders } from "@/enums/placeholders";
 import { IRoom } from "@/types/room";
