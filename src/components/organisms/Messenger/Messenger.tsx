@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IUser } from "../../../types/user";
 import UserList from "../../molecules/UserList/UserList";
 import Messages from "../../molecules/Messages/Messages";
@@ -7,6 +7,7 @@ import { userListMockData } from "@/components/molecules/UserList/data/mockData"
 import RoomList from "@/components/molecules/RoomList/RoomList";
 import { roomListMockData } from "@/components/molecules/RoomList/data/mockData";
 import io from "socket.io-client";
+import { useUser } from "@/contexts/User/User";
 
 const socket = io("http://localhost:3000", { transports: ["websocket"] });
 

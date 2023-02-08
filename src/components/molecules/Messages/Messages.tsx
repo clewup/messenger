@@ -27,13 +27,29 @@ const Messages: React.FC<IProps> = ({
 
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [message, setMessage] = useState("");
+  const [room, setRoom] = useState("");
 
   useEffect(() => {
+    if (user && selectedUser) {
+      const ids = [user.id, selectedUser.id];
+      setRoom(ids.sort().join(""));
+    }
+  }, [selectedUser]);
+
+  useEffect(() => {
+    socket.emit("joinRoomRequest", room);
+  }, [room]);
+
+  useEffect(() => {
+    socket.on("joinRoomResponse", (messages: IMessage[]) => {
+      setMessages(messages);
+      messagesEndRef.current?.scrollIntoView();
+    });
     socket.on("messageResponse", (messages: IMessage[]) => {
       setMessages(messages);
       messagesEndRef.current?.scrollIntoView();
     });
-  }, [messages]);
+  }, [socket]);
 
   if (!user) return <></>;
 
@@ -41,6 +57,7 @@ const Messages: React.FC<IProps> = ({
     const messageRequest: IMessage = {
       user: user,
       text: message,
+      room: room,
     };
     socket.emit("messageRequest", messageRequest);
     setMessage("");

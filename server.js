@@ -21,11 +21,25 @@ nextApp.prepare().then(async () => {
     socket.emit("status", "Hello from Socket.io");
 
     const messages = [];
+
+    socket.on("joinRoomRequest", (room) => {
+      console.log(`joinRoomRequest: ${room}`);
+      socket.join(room);
+      socket.emit(
+        "joinRoomResponse",
+        messages.filter((x) => x.room === room)
+      );
+    });
+
     socket.on("messageRequest", (message) => {
-      console.log(`messageRequest: ${message.user.email} - ${message.text}`);
+      const { user, text, room } = message;
+      console.log(`messageRequest: ${user.email} - ${text}`);
       messages.push(message);
 
-      socket.emit("messageResponse", messages);
+      socket.emit(
+        "messageResponse",
+        messages.filter((x) => x.room === room)
+      );
     });
 
     socket.on("disconnect", () => {
