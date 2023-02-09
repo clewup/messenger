@@ -1,4 +1,4 @@
-export interface IRoom {
+export interface IGroup {
   id: string;
   name: string;
   users: string[];

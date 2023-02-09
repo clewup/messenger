@@ -1,6 +1,6 @@
 @import '/src/styles/variables';
 
-#atom_room_tile {
+#atom_group_tile {
   display: flex;
   padding: 1rem;
   justify-content: space-between;
@@ -12,7 +12,7 @@
     cursor: pointer;
   }
 
-  .room_information {
+  .group_information {
     display: flex;
     gap: 1rem;
     align-items: center;
