@@ -13,7 +13,7 @@ import { Socket } from "socket.io-client";
 
 interface IProps {
   socket: Socket;
-  selectedUser: IUser;
+  selectedUser: IUser | undefined;
   setSelectedUser: React.Dispatch<SetStateAction<IUser | undefined>>;
 }
 
@@ -47,7 +47,7 @@ const Chat: React.FC<IProps> = ({ socket, selectedUser, setSelectedUser }) => {
     });
   }, [socket]);
 
-  if (!user) return <></>;
+  if (!user || !selectedUser) return <></>;
 
   const handleSubmit = () => {
     const messageRequest: IMessage = {
@@ -61,17 +61,6 @@ const Chat: React.FC<IProps> = ({ socket, selectedUser, setSelectedUser }) => {
 
   return (
     <div id={styles.molecule_chat}>
-      <div className={styles.chat_header}>
-        {" "}
-        <Button
-          variant={"text"}
-          color={"primary"}
-          onClick={() => setSelectedUser(undefined)}
-        >
-          <BackIcon />
-        </Button>
-      </div>
-      <Divider />
       <div className={styles.user_communications}>
         {messages.map((message) => {
           return (

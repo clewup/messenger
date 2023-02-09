@@ -7,57 +7,30 @@ import { userListMockData } from "@/components/molecules/UserList/data/mockData"
 import RoomList from "@/components/molecules/RoomList/RoomList";
 import { roomListMockData } from "@/components/molecules/RoomList/data/mockData";
 import io from "socket.io-client";
-import { useUser } from "@/contexts/User/User";
-import Button from "@/lib/mui/components/Button/Button";
 import { chatDomains } from "@/enums/chatDomains";
 import clsx from "clsx";
+import DomainSelector from "@/components/molecules/DomainSelector/DomainSelector";
 
 const socket = io("http://localhost:3000", { transports: ["websocket"] });
 
 const Messenger: React.FC = () => {
-  const [domain, setDomain] = useState(chatDomains.USER);
   const [selectedUser, setSelectedUser] = useState<IUser>();
 
   return (
     <div id={styles.organism_messenger}>
-      {!selectedUser ? (
-        <>
-          <div className={styles.domain_tabs}>
-            <div
-              className={clsx({
-                [styles.domain_tab_active]: domain === chatDomains.USER,
-                [styles.domain_tab_inactive]: domain !== chatDomains.USER,
-              })}
-              onClick={() => setDomain(chatDomains.USER)}
-              bg-color={"black"}
-            >
-              <p>Users</p>
-            </div>
-            <div
-              className={clsx({
-                [styles.domain_tab_active]: domain === chatDomains.ROOM,
-                [styles.domain_tab_inactive]: domain !== chatDomains.ROOM,
-              })}
-              onClick={() => setDomain(chatDomains.ROOM)}
-            >
-              <p>Rooms</p>
-            </div>
-          </div>
-          {domain === chatDomains.USER && (
-            <UserList
-              users={userListMockData}
-              setSelectedUser={setSelectedUser}
-            />
-          )}
-          {domain === chatDomains.ROOM && <RoomList rooms={roomListMockData} />}
-        </>
-      ) : (
+      <div className={styles.domain}>
+        <DomainSelector
+          selectedUser={selectedUser}
+          setSelectedUser={setSelectedUser}
+        />
+      </div>
+      <div className={styles.chat}>
         <Chat
           socket={socket}
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
         />
-      )}
+      </div>
     </div>
   );
 };
