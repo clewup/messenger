@@ -13,28 +13,15 @@ import { Socket } from "socket.io-client";
 
 interface IProps {
   socket: Socket;
-  selectedUser: IUser | undefined;
-  setSelectedUser: React.Dispatch<SetStateAction<IUser | undefined>>;
+  room: string;
 }
 
-const Chat: React.FC<IProps> = ({ socket, selectedUser, setSelectedUser }) => {
+const Chat: React.FC<IProps> = ({ socket, room }) => {
   const { user } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [message, setMessage] = useState("");
-  const [room, setRoom] = useState("");
-
-  useEffect(() => {
-    if (user && selectedUser) {
-      const ids = [user.id, selectedUser.id];
-      setRoom(ids.sort().join(""));
-    }
-  }, [selectedUser]);
-
-  useEffect(() => {
-    socket.emit("joinRoomRequest", room);
-  }, [room]);
 
   useEffect(() => {
     socket.on("joinRoomResponse", (messages: IMessage[]) => {
@@ -47,7 +34,7 @@ const Chat: React.FC<IProps> = ({ socket, selectedUser, setSelectedUser }) => {
     });
   }, [socket]);
 
-  if (!user || !selectedUser) return <></>;
+  if (!user) return <></>;
 
   const handleSubmit = () => {
     const messageRequest: IMessage = {

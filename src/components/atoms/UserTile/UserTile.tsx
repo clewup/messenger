@@ -6,17 +6,12 @@ import { placeholders } from "@/enums/placeholders";
 
 interface IProps {
   user: IUser;
-  selectedUser: IUser | undefined;
-  setSelectedUser: React.Dispatch<SetStateAction<IUser | undefined>>;
+  handleSelectUser: (user: IUser) => void;
 }
 
-const UserTile: React.FC<IProps> = ({
-  user,
-  selectedUser,
-  setSelectedUser,
-}) => {
+const UserTile: React.FC<IProps> = ({ user, handleSelectUser }) => {
   return (
-    <div id={styles.atom_user_tile} onClick={() => setSelectedUser?.(user)}>
+    <div id={styles.atom_user_tile} onClick={() => handleSelectUser(user)}>
       <div className={styles.user_information}>
         <img src={user.avatar ?? placeholders.IMAGE} alt={user.id} />
         <p>
