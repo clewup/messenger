@@ -1,22 +1,21 @@
-#molecule_messages {
+#molecule_chat {
   padding: 1rem;
 
-  .messages_header {
+  .chat_header {
     margin-bottom: 1rem;
   }
 
   .user_communications {
+    height: 50vh;
     padding: 1rem;
     gap: 1rem;
     display: flex;
     flex-direction: column;
-    height: 30vh;
     overflow-y: auto;
   }
 
-  .messages_action_row {
+  .chat_action_row {
     display: flex;
-    align-items: flex-end;
     gap: 1rem;
     margin-top: 1rem;
 

@@ -4,4 +4,23 @@
   background-color: $color-white;
   border-radius: $border-radius-md;
   width: 600px;
+  min-height: 40vh;
+
+  .domain_tabs {
+    display: flex;
+
+    .domain_tab_active {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 1rem;
+    }
+    .domain_tab_inactive {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
 }

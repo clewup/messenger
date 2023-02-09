@@ -1,6 +1,6 @@
 import { IUser } from "@/types/user";
 import React, { SetStateAction, useEffect, useRef, useState } from "react";
-import styles from "./Messages.module.scss";
+import styles from "./Chat.module.scss";
 import MessageTile from "@/components/atoms/MessageTile/MessageTile";
 import Button from "@/lib/mui/components/Button/Button";
 import Input from "@/lib/mui/components/Input/Input";
@@ -17,11 +17,7 @@ interface IProps {
   setSelectedUser: React.Dispatch<SetStateAction<IUser | undefined>>;
 }
 
-const Messages: React.FC<IProps> = ({
-  socket,
-  selectedUser,
-  setSelectedUser,
-}) => {
+const Chat: React.FC<IProps> = ({ socket, selectedUser, setSelectedUser }) => {
   const { user } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -64,8 +60,8 @@ const Messages: React.FC<IProps> = ({
   };
 
   return (
-    <div id={styles.molecule_messages}>
-      <div className={styles.messages_header}>
+    <div id={styles.molecule_chat}>
+      <div className={styles.chat_header}>
         {" "}
         <Button
           variant={"text"}
@@ -86,7 +82,7 @@ const Messages: React.FC<IProps> = ({
         })}
         <div ref={messagesEndRef} />
       </div>
-      <div className={styles.messages_action_row}>
+      <div className={styles.chat_action_row}>
         <Input
           label={""}
           value={message}
@@ -100,4 +96,4 @@ const Messages: React.FC<IProps> = ({
     </div>
   );
 };
-export default Messages;
+export default Chat;
