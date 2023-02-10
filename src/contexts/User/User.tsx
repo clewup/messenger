@@ -5,29 +5,33 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { ILogin, IRegister, IUser } from "@/types/user";
+import { IChatUser, ILogin, IRegister, IUser } from "@/types/user";
 import { postLogin } from "@/api/login";
 import { postRegister } from "@/api/user";
-import { userListMockData } from "@/components/molecules/UserList/data/mockData";
 import { useRouter } from "next/router";
 
 interface IProps {
   user: IUser | null;
   setUser: React.Dispatch<SetStateAction<IUser | null>>;
+  chatUser: IChatUser | null;
+  setChatUser: React.Dispatch<SetStateAction<IChatUser | null>>;
 }
 
 const initialState: IProps = {
   user: null,
   setUser: (() => undefined) as React.Dispatch<any>,
+  chatUser: null,
+  setChatUser: (() => undefined) as React.Dispatch<any>,
 };
 
 const UserContext = createContext<IProps>(initialState);
 
 const UserProvider = ({ children }: any) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [chatUser, setChatUser] = useState<IChatUser | null>(null);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, chatUser, setChatUser }}>
       {children}
     </UserContext.Provider>
   );
@@ -35,7 +39,7 @@ const UserProvider = ({ children }: any) => {
 
 const useUser = () => {
   const context = useContext(UserContext);
-  const { user, setUser } = context;
+  const { setUser, setChatUser } = context;
 
   const router = useRouter();
 
@@ -55,6 +59,10 @@ const useUser = () => {
       .then((res) => {
         if (res.status === 200) {
           setUser(res.data.user);
+          setChatUser({
+            id: res.data.user.id,
+            username: `${res.data.user.firstName} ${res.data.user.lastName}`,
+          });
           setAccessToken(res.data.accessToken);
           setAuthenticated(true);
         } else {

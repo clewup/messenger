@@ -1,4 +1,4 @@
-import { IUser } from "@/types/user";
+import { IChatUser, IUser } from "@/types/user";
 import React, { SetStateAction, useEffect, useRef, useState } from "react";
 import styles from "./Chat.module.scss";
 import MessageTile from "@/components/atoms/MessageTile/MessageTile";
@@ -38,7 +38,10 @@ const Chat: React.FC<IProps> = ({ socket, room }) => {
 
   const handleSubmit = () => {
     const messageRequest: IMessage = {
-      user: user,
+      user: {
+        id: user.id,
+        username: `${user.firstName} ${user.lastName}`,
+      },
       text: message,
       room: room,
     };

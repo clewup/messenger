@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./GroupList.module.scss";
 import { IGroup } from "@/types/group";
 import GroupTile from "@/components/atoms/GroupTile/GroupTile";
+import { Socket } from "socket.io-client";
 
 interface IProps {
   groups: IGroup[];

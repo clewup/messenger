@@ -1,7 +1,7 @@
-import { IUser } from "@/types/user";
+import { IChatUser } from "@/types/user";
 
 export interface IMessage {
-  user: IUser;
+  user: IChatUser;
   text: string;
   room: string;
 }

@@ -3,7 +3,11 @@ export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  avatar?: string;
+}
+
+export interface IChatUser {
+  id: string;
+  username: string;
 }
 
 export interface ILogin {

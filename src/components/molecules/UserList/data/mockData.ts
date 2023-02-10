@@ -1,28 +1,16 @@
-import { IUser } from "@/types/user";
+import { IChatUser, IUser } from "@/types/user";
 
-export const userListMockData: IUser[] = [
+export const userListMockData: IChatUser[] = [
   {
     id: "1",
-    firstName: "User",
-    lastName: "One",
-    email: "one@email.com",
-    avatar:
-      "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+    username: "User1",
   },
   {
     id: "2",
-    firstName: "User",
-    lastName: "Two",
-    email: "two@email.com",
-    avatar:
-      "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortWaved&accessoriesType=Kurt&hairColor=BlondeGolden&facialHairType=Blank&clotheType=BlazerShirt&clotheColor=Heather&eyeType=Hearts&eyebrowType=AngryNatural&mouthType=Serious&skinColor=Yellow",
+    username: "User2",
   },
   {
     id: "3",
-    firstName: "User",
-    lastName: "Three",
-    email: "three@email.com",
-    avatar:
-      "https://avataaars.io/?avatarStyle=Circle&topType=NoHair&accessoriesType=Sunglasses&hairColor=Red&facialHairType=MoustacheMagnum&facialHairColor=BlondeGolden&clotheType=CollarSweater&clotheColor=Gray01&eyeType=Wink&eyebrowType=SadConcerned&mouthType=Smile&skinColor=Brown",
+    username: "User3",
   },
 ];

@@ -6,13 +6,15 @@ import GroupList from "@/components/molecules/GroupList/GroupList";
 import { groupListMockData } from "@/components/molecules/GroupList/data/mockData";
 import React, { SetStateAction, useState } from "react";
 import { Socket } from "socket.io-client";
+import { IChatUser } from "@/types/user";
 
 interface IProps {
   socket: Socket;
+  chatUsers: IChatUser[];
   setRoom: React.Dispatch<SetStateAction<string>>;
 }
 
-const DomainSelector: React.FC<IProps> = ({ socket, setRoom }) => {
+const DomainSelector: React.FC<IProps> = ({ socket, chatUsers, setRoom }) => {
   const [domain, setDomain] = useState(chatDomains.USER);
 
   return (
@@ -32,7 +34,7 @@ const DomainSelector: React.FC<IProps> = ({ socket, setRoom }) => {
         </div>
       </div>
       {domain === chatDomains.USER && (
-        <UserList socket={socket} users={userListMockData} setRoom={setRoom} />
+        <UserList socket={socket} chatUsers={chatUsers} setRoom={setRoom} />
       )}
       {domain === chatDomains.GROUP && <GroupList groups={groupListMockData} />}
     </div>

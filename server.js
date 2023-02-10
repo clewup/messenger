@@ -20,8 +20,18 @@ nextApp.prepare().then(async () => {
     console.log("connection");
     socket.emit("status", "Hello from Socket.io");
 
-    const messages = [];
+    const users = [];
+    socket.on("joinChatRequest", (chatUser) => {
+      console.log(`joinChatRequest: ${chatUser.username}`);
 
+      if (!users.includes(chatUser)) {
+        users.push(chatUser);
+      }
+
+      socket.emit("joinChatResponse", users);
+    });
+
+    const messages = [];
     socket.on("joinRoomRequest", (room) => {
       console.log(`joinRoomRequest: ${room}`);
       socket.join(room);

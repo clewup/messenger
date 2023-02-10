@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import { IUser } from "../../../types/user";
+import { IChatUser } from "../../../types/user";
 import styles from "./UserList.module.scss";
 import UserTile from "@/components/atoms/UserTile/UserTile";
 import { Socket } from "socket.io-client";
@@ -7,14 +7,14 @@ import { useUser } from "@/contexts/User/User";
 
 interface IProps {
   socket: Socket;
-  users: IUser[];
+  chatUsers: IChatUser[];
   setRoom: React.Dispatch<SetStateAction<string>>;
 }
 
-const UserList: React.FC<IProps> = ({ socket, users, setRoom }) => {
+const UserList: React.FC<IProps> = ({ socket, chatUsers, setRoom }) => {
   const { user } = useUser();
 
-  const handleSelectUser = (selectedUser: IUser) => {
+  const handleSelectUser = (selectedUser: IChatUser) => {
     if (user && selectedUser) {
       const ids = [user.id, selectedUser.id];
       const room = ids.sort().join("");
@@ -25,10 +25,10 @@ const UserList: React.FC<IProps> = ({ socket, users, setRoom }) => {
 
   return (
     <div id={styles.molecule_user_list}>
-      {users.map((user) => {
+      {chatUsers.map((chatUser) => {
         return (
-          <div key={user.id}>
-            <UserTile user={user} handleSelectUser={handleSelectUser} />
+          <div key={chatUser.id}>
+            <UserTile chatUser={chatUser} handleSelectUser={handleSelectUser} />
           </div>
         );
       })}

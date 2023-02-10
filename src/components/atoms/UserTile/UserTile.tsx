@@ -1,22 +1,20 @@
 import React, { SetStateAction } from "react";
 import styles from "./UserTile.module.scss";
-import { IUser } from "@/types/user";
+import { IChatUser, IUser } from "@/types/user";
 import SendIcon from "@mui/icons-material/Send";
 import { placeholders } from "@/enums/placeholders";
 
 interface IProps {
-  user: IUser;
-  handleSelectUser: (user: IUser) => void;
+  chatUser: IChatUser;
+  handleSelectUser: (user: IChatUser) => void;
 }
 
-const UserTile: React.FC<IProps> = ({ user, handleSelectUser }) => {
+const UserTile: React.FC<IProps> = ({ chatUser, handleSelectUser }) => {
   return (
-    <div id={styles.atom_user_tile} onClick={() => handleSelectUser(user)}>
+    <div id={styles.atom_user_tile} onClick={() => handleSelectUser(chatUser)}>
       <div className={styles.user_information}>
-        <img src={user.avatar ?? placeholders.IMAGE} alt={user.id} />
-        <p>
-          {user.firstName} {user.lastName}
-        </p>
+        <img src={placeholders.IMAGE} alt={chatUser.id} />
+        <p>{chatUser.username}</p>
       </div>
       <div className={styles.action_row}>
         <SendIcon />
