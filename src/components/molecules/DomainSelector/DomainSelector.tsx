@@ -1,21 +1,31 @@
 import styles from "./DomainSelector.module.scss";
 import { chatDomains } from "@/enums/chatDomains";
 import UserList from "@/components/molecules/UserList/UserList";
-import { userListMockData } from "@/components/molecules/UserList/data/mockData";
 import GroupList from "@/components/molecules/GroupList/GroupList";
 import { groupListMockData } from "@/components/molecules/GroupList/data/mockData";
-import React, { SetStateAction, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { IChatUser } from "@/types/user";
+import { IGroup } from "@/types/group";
 
 interface IProps {
   socket: Socket;
-  chatUsers: IChatUser[];
   setRoom: React.Dispatch<SetStateAction<string>>;
 }
 
-const DomainSelector: React.FC<IProps> = ({ socket, chatUsers, setRoom }) => {
+const DomainSelector: React.FC<IProps> = ({ socket, setRoom }) => {
   const [domain, setDomain] = useState(chatDomains.USER);
+  const [chatUsers, setChatUsers] = useState<IChatUser[]>([]);
+  const [groups, setGroups] = useState<IGroup[]>([]);
+
+  useEffect(() => {
+    socket.on("joinChatResponse", (chatUsers: IChatUser[]) => {
+      setChatUsers(chatUsers);
+    });
+    socket.on("newGroupResponse", (groups: IGroup[]) => {
+      setGroups(groups);
+    });
+  }, [socket]);
 
   return (
     <div id={styles.domain_selector}>
@@ -36,7 +46,9 @@ const DomainSelector: React.FC<IProps> = ({ socket, chatUsers, setRoom }) => {
       {domain === chatDomains.USER && (
         <UserList socket={socket} chatUsers={chatUsers} setRoom={setRoom} />
       )}
-      {domain === chatDomains.GROUP && <GroupList groups={groupListMockData} />}
+      {domain === chatDomains.GROUP && (
+        <GroupList socket={socket} groups={groupListMockData} />
+      )}
     </div>
   );
 };

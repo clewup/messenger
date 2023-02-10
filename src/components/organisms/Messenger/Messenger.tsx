@@ -10,27 +10,16 @@ const socket = io("http://localhost:3000", { transports: ["websocket"] });
 
 const Messenger: React.FC = () => {
   const [room, setRoom] = useState("");
-  const [chatUsers, setChatUsers] = useState<IChatUser[]>([]);
   const { chatUser } = useUser();
 
   useEffect(() => {
     socket.emit("joinChatRequest", chatUser);
   }, []);
 
-  useEffect(() => {
-    socket.on("joinChatResponse", (chatUsers: IChatUser[]) => {
-      setChatUsers(chatUsers);
-    });
-  }, [socket]);
-
   return (
     <div id={styles.organism_messenger}>
       <div className={styles.domain}>
-        <DomainSelector
-          socket={socket}
-          setRoom={setRoom}
-          chatUsers={chatUsers}
-        />
+        <DomainSelector socket={socket} setRoom={setRoom} />
       </div>
       <div className={styles.chat}>
         <Chat socket={socket} room={room} />

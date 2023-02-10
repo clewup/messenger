@@ -22,13 +22,22 @@ nextApp.prepare().then(async () => {
 
     const users = [];
     socket.on("joinChatRequest", (chatUser) => {
-      console.log(`joinChatRequest: ${chatUser.username}`);
+      console.log(`joinChatRequest: ${chatUser?.username}`);
 
       if (!users.includes(chatUser)) {
         users.push(chatUser);
       }
 
       socket.emit("joinChatResponse", users);
+    });
+
+    const groups = [];
+    socket.on("newGroupRequest", (group) => {
+      console.log(`newGroupRequest: ${group.name}`);
+
+      groups.push(group);
+
+      socket.emit("newGroupResponse", groups);
     });
 
     const messages = [];

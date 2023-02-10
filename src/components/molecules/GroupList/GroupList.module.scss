@@ -1,3 +1,8 @@
-#molecule_room_list {
+#molecule_group_list {
 
+  .groups_action_row {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+  }
 }

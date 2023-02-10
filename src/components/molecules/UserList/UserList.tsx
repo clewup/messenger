@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import { IChatUser } from "../../../types/user";
 import styles from "./UserList.module.scss";
 import UserTile from "@/components/atoms/UserTile/UserTile";
