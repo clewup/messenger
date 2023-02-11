@@ -53,7 +53,7 @@ const LoginForm = () => {
               }
               type={"password"}
             />
-            <Button onClick={handleSubmit} isLoading={isLoading}>
+            <Button type={"submit"} isLoading={isLoading}>
               Login
             </Button>
           </Form>

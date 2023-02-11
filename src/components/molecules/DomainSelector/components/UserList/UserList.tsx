@@ -1,5 +1,5 @@
 import React, { SetStateAction, useEffect, useState } from "react";
-import { IChatUser } from "../../../types/user";
+import { IChatUser } from "../../../../../types/user";
 import styles from "./UserList.module.scss";
 import UserTile from "@/components/atoms/UserTile/UserTile";
 import { Socket } from "socket.io-client";
@@ -25,13 +25,19 @@ const UserList: React.FC<IProps> = ({ socket, chatUsers, setRoom }) => {
 
   return (
     <div id={styles.molecule_user_list}>
-      {chatUsers.map((chatUser) => {
-        return (
-          <div key={chatUser?.id}>
-            <UserTile chatUser={chatUser} handleSelectUser={handleSelectUser} />
-          </div>
-        );
-      })}
+      {chatUsers.length &&
+        chatUsers
+          .filter((chatUser) => chatUser?.id != user?.id)
+          .map((chatUser) => {
+            return (
+              <div key={chatUser?.id}>
+                <UserTile
+                  chatUser={chatUser}
+                  handleSelectUser={handleSelectUser}
+                />
+              </div>
+            );
+          })}
     </div>
   );
 };

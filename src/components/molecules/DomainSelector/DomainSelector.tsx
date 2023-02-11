@@ -1,8 +1,8 @@
 import styles from "./DomainSelector.module.scss";
 import { chatDomains } from "@/enums/chatDomains";
-import UserList from "@/components/molecules/UserList/UserList";
-import GroupList from "@/components/molecules/GroupList/GroupList";
-import { groupListMockData } from "@/components/molecules/GroupList/data/mockData";
+import UserList from "@/components/molecules/DomainSelector/components/UserList/UserList";
+import GroupList from "@/components/molecules/DomainSelector/components/GroupList/GroupList";
+import { groupListMockData } from "@/components/molecules/DomainSelector/components/GroupList/data/mockData";
 import React, { SetStateAction, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { IChatUser } from "@/types/user";

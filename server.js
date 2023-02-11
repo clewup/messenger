@@ -21,17 +21,19 @@ nextApp.prepare().then(async () => {
     socket.emit("status", "Hello from Socket.io");
 
     const users = [];
+    const groups = [];
+    const messages = [];
+
     socket.on("joinChatRequest", (chatUser) => {
       console.log(`joinChatRequest: ${chatUser?.username}`);
 
-      if (!users.includes(chatUser)) {
+      if (chatUser && !users.includes(chatUser)) {
         users.push(chatUser);
       }
 
       socket.emit("joinChatResponse", users);
     });
 
-    const groups = [];
     socket.on("createGroupRequest", (group) => {
       console.log(`newGroupRequest: ${group.name}`);
 
@@ -40,7 +42,6 @@ nextApp.prepare().then(async () => {
       socket.emit("createGroupResponse", groups);
     });
 
-    const messages = [];
     socket.on("joinRoomRequest", (room) => {
       console.log(`joinRoomRequest: ${room}`);
       socket.join(room);

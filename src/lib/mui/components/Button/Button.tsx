@@ -4,6 +4,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 type Variant = "text" | "contained" | "outlined";
 type Size = "small" | "medium" | "large";
 type Color = "primary" | "secondary" | "success" | "error" | "warning" | "info";
+type Type = "button" | "submit";
 
 interface IProps {
   children: string | JSX.Element;
@@ -12,9 +13,10 @@ interface IProps {
   color?: Color;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
-  onClick: () => void;
+  onClick?: () => void;
   isDisabled?: boolean;
   isLoading?: boolean;
+  type?: Type;
 }
 
 const Button: React.FC<IProps> = ({
@@ -27,6 +29,7 @@ const Button: React.FC<IProps> = ({
   onClick,
   isDisabled,
   isLoading,
+  type = "button",
 }) => {
   return (
     <LoadingButton
@@ -38,6 +41,7 @@ const Button: React.FC<IProps> = ({
       onClick={onClick}
       disabled={isDisabled}
       loading={isLoading}
+      type={type}
     >
       {children}
     </LoadingButton>

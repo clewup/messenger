@@ -1,5 +1,5 @@
 import { IMessage } from "@/types/message";
-import { userListMockData } from "@/components/molecules/UserList/data/mockData";
+import { userListMockData } from "@/components/molecules/DomainSelector/components/UserList/data/mockData";
 
 export const messagesMockData: IMessage[] = [
   {

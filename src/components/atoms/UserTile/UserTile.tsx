@@ -3,6 +3,7 @@ import styles from "./UserTile.module.scss";
 import { IChatUser, IUser } from "@/types/user";
 import SendIcon from "@mui/icons-material/Send";
 import { placeholders } from "@/enums/placeholders";
+import { useUser } from "@/contexts/User/User";
 
 interface IProps {
   chatUser: IChatUser;
@@ -10,6 +11,8 @@ interface IProps {
 }
 
 const UserTile: React.FC<IProps> = ({ chatUser, handleSelectUser }) => {
+  const { user } = useUser();
+
   return (
     <div id={styles.atom_user_tile} onClick={() => handleSelectUser(chatUser)}>
       <div className={styles.user_information}>
