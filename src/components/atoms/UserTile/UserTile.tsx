@@ -13,8 +13,8 @@ const UserTile: React.FC<IProps> = ({ chatUser, handleSelectUser }) => {
   return (
     <div id={styles.atom_user_tile} onClick={() => handleSelectUser(chatUser)}>
       <div className={styles.user_information}>
-        <img src={placeholders.IMAGE} alt={chatUser.id} />
-        <p>{chatUser.username}</p>
+        <img src={placeholders.IMAGE} alt={chatUser?.id} />
+        <p>{chatUser?.username}</p>
       </div>
       <div className={styles.action_row}>
         <SendIcon />

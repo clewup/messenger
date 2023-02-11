@@ -32,12 +32,12 @@ nextApp.prepare().then(async () => {
     });
 
     const groups = [];
-    socket.on("newGroupRequest", (group) => {
+    socket.on("createGroupRequest", (group) => {
       console.log(`newGroupRequest: ${group.name}`);
 
       groups.push(group);
 
-      socket.emit("newGroupResponse", groups);
+      socket.emit("createGroupResponse", groups);
     });
 
     const messages = [];

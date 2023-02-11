@@ -22,7 +22,7 @@ const DomainSelector: React.FC<IProps> = ({ socket, setRoom }) => {
     socket.on("joinChatResponse", (chatUsers: IChatUser[]) => {
       setChatUsers(chatUsers);
     });
-    socket.on("newGroupResponse", (groups: IGroup[]) => {
+    socket.on("createGroupResponse", (groups: IGroup[]) => {
       setGroups(groups);
     });
   }, [socket]);
@@ -47,7 +47,7 @@ const DomainSelector: React.FC<IProps> = ({ socket, setRoom }) => {
         <UserList socket={socket} chatUsers={chatUsers} setRoom={setRoom} />
       )}
       {domain === chatDomains.GROUP && (
-        <GroupList socket={socket} groups={groupListMockData} />
+        <GroupList socket={socket} groups={groups} setRoom={setRoom} />
       )}
     </div>
   );
