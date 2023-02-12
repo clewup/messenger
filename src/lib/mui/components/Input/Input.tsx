@@ -5,7 +5,7 @@ type Variant = "standard" | "filled" | "outlined";
 type Type = "text" | "password" | "email";
 
 interface IProps {
-  label: string;
+  label?: string;
   value: string;
   variant?: Variant;
   onChange: (
@@ -13,6 +13,7 @@ interface IProps {
   ) => void;
   className?: string;
   type?: Type;
+  placeholder?: string;
 }
 
 const Input: React.FC<IProps> = ({
@@ -22,6 +23,7 @@ const Input: React.FC<IProps> = ({
   onChange,
   className,
   type = "text",
+  placeholder,
 }) => {
   return (
     <TextField
@@ -31,6 +33,7 @@ const Input: React.FC<IProps> = ({
       onChange={onChange}
       className={className}
       type={type}
+      placeholder={placeholder}
     />
   );
 };

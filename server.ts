@@ -19,11 +19,11 @@ nextApp.prepare().then(async () => {
   const io = new socketIO.Server();
   io.attach(server);
 
-  io.on("connection", (socket: any) => {
-    const users: IChatUser[] = [];
-    const groups: IGroup[] = [];
-    const messages: IMessage[] = [];
+  const users: IChatUser[] = [];
+  const groups: IGroup[] = [];
+  const messages: IMessage[] = [];
 
+  io.on("connection", (socket: any) => {
     socket.on("joinChatRequest", (chatUser: IChatUser) => {
       if (chatUser && !users.includes(chatUser)) {
         users.push(chatUser);

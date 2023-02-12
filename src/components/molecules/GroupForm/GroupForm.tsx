@@ -42,7 +42,12 @@ const GroupForm: React.FC<IProps> = ({ socket, setModalOpen }) => {
                 setFieldValue(groupFormValues.name, e.target.value);
               }}
             />
-            <Button type={"submit"}>Create</Button>
+            <div className={styles.group_form_action_row}>
+              <Button type={"submit"}>Create</Button>
+              <Button onClick={() => setModalOpen(false)} color={"error"}>
+                Cancel
+              </Button>
+            </div>
           </Form>
         );
       }}

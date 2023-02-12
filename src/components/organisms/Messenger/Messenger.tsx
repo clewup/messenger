@@ -4,7 +4,6 @@ import styles from "./Messenger.module.scss";
 import io from "socket.io-client";
 import DomainSelector from "@/components/molecules/DomainSelector/DomainSelector";
 import { useUser } from "@/contexts/User/User";
-import { IChatUser } from "@/types/user";
 
 const socket = io("http://localhost:3000", { transports: ["websocket"] });
 

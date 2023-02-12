@@ -18,7 +18,7 @@ const MessageTile: React.FC<IProps> = ({ user, message }) => {
       }
     >
       <p>
-        <b>{message.user.id !== user.id ? message.user.firstName : "You"}:</b>
+        <b>{message.user.id !== user.id ? message.user.username : "You"}:</b>
       </p>
       <p>{message.text}</p>
     </div>

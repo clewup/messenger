@@ -8,6 +8,7 @@ export interface IUser {
 export interface IChatUser {
   id: string;
   username: string;
+  socketId: string;
 }
 
 export interface ILogin {

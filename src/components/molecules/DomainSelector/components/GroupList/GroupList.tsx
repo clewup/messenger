@@ -15,8 +15,6 @@ interface IProps {
 }
 
 const GroupList: React.FC<IProps> = ({ socket, groups, setRoom }) => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
   const handleSelectGroup = (selectedGroup: IGroup) => {
     const room = selectedGroup.id;
     setRoom(room);
@@ -24,26 +22,15 @@ const GroupList: React.FC<IProps> = ({ socket, groups, setRoom }) => {
   };
 
   return (
-    <>
-      <div id={styles.molecule_group_list}>
-        {groups.map((group) => {
-          return (
-            <div key={group.id}>
-              <GroupTile group={group} handleSelectGroup={handleSelectGroup} />
-            </div>
-          );
-        })}
-        <div className={styles.groups_action_row}>
-          <Button onClick={() => setModalOpen(true)}>Create</Button>
-        </div>
-      </div>
-
-      <Modal open={isModalOpen} onClose={() => setModalOpen(false)}>
-        <div id={styles.groups_modal_wrapper}>
-          <GroupForm socket={socket} setModalOpen={setModalOpen} />
-        </div>
-      </Modal>
-    </>
+    <div id={styles.molecule_group_list}>
+      {groups.map((group) => {
+        return (
+          <div key={group.id}>
+            <GroupTile group={group} handleSelectGroup={handleSelectGroup} />
+          </div>
+        );
+      })}
+    </div>
   );
 };
 export default GroupList;

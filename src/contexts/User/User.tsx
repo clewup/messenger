@@ -62,6 +62,7 @@ const useUser = () => {
           setChatUser({
             id: res.data.user.id,
             username: `${res.data.user.firstName} ${res.data.user.lastName}`,
+            socketId: "",
           });
           setAccessToken(res.data.accessToken);
           setAuthenticated(true);
