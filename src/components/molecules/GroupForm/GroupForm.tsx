@@ -5,6 +5,7 @@ import { IGroup } from "@/types/group";
 import { Socket } from "socket.io-client";
 import React, { SetStateAction } from "react";
 import Button from "@/lib/mui/components/Button/Button";
+import { useUser } from "@/contexts/User/User";
 
 interface IProps {
   socket: Socket;
@@ -12,6 +13,8 @@ interface IProps {
 }
 
 const GroupForm: React.FC<IProps> = ({ socket, setModalOpen }) => {
+  const { chatUser } = useUser();
+
   const groupFormValues = {
     id: "id",
     name: "name",
@@ -20,6 +23,8 @@ const GroupForm: React.FC<IProps> = ({ socket, setModalOpen }) => {
   const initialValues: IGroup = {
     id: `${Math.floor(Math.random() * 10000) + 1}`,
     name: "",
+    users: [chatUser!.id],
+    creator: chatUser!.id,
   };
 
   const handleSubmit = (values: IGroup) => {

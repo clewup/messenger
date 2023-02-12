@@ -9,6 +9,11 @@
   justify-content: center;
   align-items: center;
   background-color: $color-offwhite;
+
+  div {
+    display: flex;
+    gap: 1rem;
+  }
 }
 
 #groups_modal_wrapper {

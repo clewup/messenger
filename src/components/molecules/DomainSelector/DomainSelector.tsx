@@ -26,6 +26,9 @@ const DomainSelector: React.FC<IProps> = ({ socket, setRoom }) => {
     socket.on("createGroupResponse", (groups: IGroup[]) => {
       setGroups(groups);
     });
+    socket.on("joinGroupResponse", (groups: IGroup[]) => {
+      setGroups(groups);
+    });
   }, [socket]);
 
   return (

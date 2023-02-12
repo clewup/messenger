@@ -25,13 +25,18 @@ const UserList: React.FC<IProps> = ({ socket, chatUsers, setRoom }) => {
 
   return (
     <div id={styles.molecule_user_list}>
-      {chatUsers.map((chatUser) => {
-        return (
-          <div key={chatUser?.id}>
-            <UserTile chatUser={chatUser} handleSelectUser={handleSelectUser} />
-          </div>
-        );
-      })}
+      {chatUsers
+        .filter((x) => x.id !== user?.id)
+        .map((chatUser) => {
+          return (
+            <div key={chatUser?.id}>
+              <UserTile
+                chatUser={chatUser}
+                handleSelectUser={handleSelectUser}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 };
