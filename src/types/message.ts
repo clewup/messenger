@@ -1,7 +1,8 @@
 import { IChatUser } from "@/types/user";
 
 export interface IMessage {
-  user: IChatUser;
+  sender: IChatUser;
+  recipient: string;
   text: string;
   room: string;
 }

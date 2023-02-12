@@ -12,12 +12,12 @@ interface IProps {
 }
 
 const UserList: React.FC<IProps> = ({ socket, chatUsers, setRoom }) => {
-  const { user } = useUser();
+  const { chatUser } = useUser();
 
   const handleSelectUser = (selectedUser: IChatUser) => {
-    if (user && selectedUser) {
-      const ids = [user.id, selectedUser.id];
-      const room = ids.sort().join("");
+    if (chatUser && selectedUser) {
+      const ids = [chatUser.id, selectedUser.id];
+      const room = ids.sort().join(":");
       setRoom(room);
       socket.emit("joinRoomRequest", room);
     }
@@ -26,7 +26,7 @@ const UserList: React.FC<IProps> = ({ socket, chatUsers, setRoom }) => {
   return (
     <div id={styles.molecule_user_list}>
       {chatUsers
-        .filter((x) => x.id !== user?.id)
+        .filter((x) => x.id !== chatUser?.id)
         .map((chatUser) => {
           return (
             <div key={chatUser?.id}>

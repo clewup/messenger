@@ -17,7 +17,7 @@ interface IProps {
 }
 
 const Chat: React.FC<IProps> = ({ socket, room }) => {
-  const { user } = useUser();
+  const { chatUser } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<IMessage[]>([]);
@@ -34,14 +34,10 @@ const Chat: React.FC<IProps> = ({ socket, room }) => {
     });
   }, [socket]);
 
-  if (!user) return <></>;
-
   const handleSubmit = () => {
     const messageRequest: IMessage = {
-      user: {
-        id: user.id,
-        username: `${user.firstName} ${user.lastName}`,
-      },
+      sender: chatUser!,
+      recipient: room.split(":")[1],
       text: message,
       room: room,
     };
@@ -55,7 +51,7 @@ const Chat: React.FC<IProps> = ({ socket, room }) => {
         {messages.map((message) => {
           return (
             <div key={`message-${Math.random()}`}>
-              <MessageTile user={user} message={message} />
+              <MessageTile chatUser={chatUser!} message={message} />
             </div>
           );
         })}
