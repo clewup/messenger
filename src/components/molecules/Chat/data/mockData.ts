@@ -3,17 +3,20 @@ import { userListMockData } from "@/components/molecules/DomainSelector/componen
 
 export const messagesMockData: IMessage[] = [
   {
-    user: userListMockData[0],
+    sender: userListMockData[0],
+    recipient: "1",
     text: "test message",
     room: "1",
   },
   {
-    user: userListMockData[1],
+    sender: userListMockData[1],
+    recipient: "2",
     text: "test message",
     room: "1",
   },
   {
-    user: userListMockData[2],
+    sender: userListMockData[2],
+    recipient: "3",
     text: "test message",
     room: "1",
   },
