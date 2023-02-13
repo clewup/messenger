@@ -1,39 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="https://cdn.icon-icons.com/icons2/1996/PNG/512/chat_facebook_media_message_messenger_network_social_icon_123283.png" alt="Project logo"></a>
+</p>
 
-## Getting Started
+<h3 align="center">Messenger</h3>
 
-First, run the development server:
+<div align="center">
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  [![Status](https://img.shields.io/badge/status-active-success.svg)]() 
+  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+
+</div>
+
+---
+
+<p align="center">A project portfolio piece utilising websockets for live chat.
+    <br> 
+</p>
+
+## 📝 Table of Contents
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Deployment](#deployment)
+- [Usage](#usage)
+- [Built Using](#built_using)
+
+## 🧐 About <a name = "about"></a>
+Messenger is a peer to peer messaging service with group chat functionality. It utilises socket.io to create bidirectional, event based communication. Users must register/login using the Authorisation API in order to use the service.
+
+## 🏁 Getting Started <a name = "getting_started"></a>
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+What things you need to install the software and how to install them.
+
+```
+Yarn
+Authorisation API (if running the backend locally)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installing
+1. Clone the repository.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+https://github.com/clewup/messenger.git
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+2. Install the required packages.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Start the project.
 
-## Learn More
+```
+yarn dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🔧 Running the tests <a name = "tests"></a>
+```
+yarn test
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎈 Usage <a name="usage"></a>
+The application is deployed for viewing and use at https://messenger.clewup.co.uk.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🚀 Deployment <a name = "deployment"></a>
+The application is deployed through Vercel.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# messenger
+## ⛏️ Built Using <a name = "built_using"></a>
+- [NextJS](https://nextjs.org) - Framework (utilising a custom express server)
